@@ -20,7 +20,7 @@
         <configuration>
           <testFailureIgnore> false </testFailureIgnore>
           <suiteXmlFiles>
-            <suiteXmlFile>testng-qa.xml</suiteXmlFile>
+            <suiteXmlFile>testng-qa-INT.xml</suiteXmlFile>
           </suiteXmlFiles>
         </configuration>
       </plugin>

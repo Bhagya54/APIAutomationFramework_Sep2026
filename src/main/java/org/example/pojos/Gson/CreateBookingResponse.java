@@ -1,7 +1,7 @@
 package org.example.pojos.Gson;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-public class BookingResponse {
+public class CreateBookingResponse {
 
     @SerializedName("bookingid")
     @Expose

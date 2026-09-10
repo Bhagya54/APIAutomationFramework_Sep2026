@@ -8,7 +8,7 @@
     </groups>
     <test verbose="2" preserve-order="true" name="C:/Users/91733/Documents/APITestcases/APIAutomationFramework_Sep2026">
         <classes>
-            <class name="org.example.tests.sample.TestIntegrationTC"/>
+            <class name="org.example.tests.crud.testCreateBooking"/>
             <class name="org.example.tests.integration.Integration_Scenario1"/>
         </classes>
     </test>

@@ -27,27 +27,25 @@ public class BaseTest {
     public ValidatableResponse validatableResponse;
     public PayloadManager payloadManager;
     public AssertActions assertActions;
-    public ExcelReader excel = new ExcelReader(".\\src\\test\\resources\\data\\testData.xlsx");
+    public ExcelReader excel=new ExcelReader(".\\src\\test\\resources\\data\\testData.xlsx");
+    public Logger log= Logger.getLogger(BaseTest.class);
     public FileInputStream fis;
-    public Properties dataProp = new Properties();
-    public Logger log = Logger.getLogger(BaseTest.class);
-
+    public Properties dataProp=new Properties();
     @BeforeMethod(alwaysRun = true)
     public void setUp() {
         try {
-            fis = new FileInputStream(".\\src\\test\\resources\\properties\\log4j.properties");
+            fis=new FileInputStream("./src/test/resources/properties/log4j.properties");
+            PropertyConfigurator.configure(fis);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
 
-        PropertyConfigurator.configure(fis);
-        log.info("Test case execution started");
         try {
             fis = new FileInputStream("./src/test/resources/properties/data.properties");
             dataProp.load(fis);
+            log.info("Data Properties file has been loaded");
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -58,11 +56,13 @@ public class BaseTest {
 //                .baseUri(APIConstants.BASE_URL)
 //                .contentType(ContentType.JSON);
 
+        log.info("API Test has been started");
         requestSpecification = new RequestSpecBuilder()
-                .setBaseUri(APIConstants.BASE_URL)
+                //.setBaseUri(APIConstants.BASE_URL)
+                .setBaseUri(dataProp.getProperty("URL"))
                 .addHeader("Content-Type", "application/json")
                 .build();
-        log.info("Set Base URL: " + APIConstants.BASE_URL + " Content Type: " + ContentType.JSON);
+
     }
 
     public String getToken() {

@@ -1,17 +1,16 @@
 package org.example.utils;
 
+import java.lang.reflect.Method;
+
 import org.example.base.BaseTest;
 import org.testng.annotations.DataProvider;
-
-import java.lang.reflect.Method;
 
 
 
 public class DataUtils extends BaseTest {
 	@DataProvider(name="dp")
 	public Object[][] getData(Method m){
-
-
+				
 		String sheetName=m.getName();
 		int noOfRows=excel.getRowCount(sheetName);
 		int noOfCols=excel.getColumnCount(sheetName);

@@ -51,35 +51,42 @@ public class Integration_Scenario1 extends BaseTest {
                 .log().all()
                 .when().get();
         validatableResponse=response.then().log().all().statusCode(200);
-        Booking booking= payloadManager.updateGetResponse(response.asString());
-        System.out.println(booking.getFirstname());
-        System.out.println(booking.getLastname());
-
+        Booking booking=payloadManager.getUpdateResponse(response.asString());
+        String firstName=booking.getFirstname();//actual Result
+        String lastName=booking.getLastname();//actual Result
+        assertActions.verifyKeys(firstName,"Jim");
+        assertActions.verifyResponseBody(lastName,"Brown","Last name is not matching");
     }
 
     @Test(groups="qa",priority=3)
     @Owner("Bhagya")
     @Description("TCINT#1 - Step 3.Verify the update booking ")
     public void updateBooking(ITestContext iTestContext){
+//{{prod_baseURL}}/booking/613
+        //token
         Integer bookingId=(Integer)iTestContext.getAttribute("b_id");
-        response=given()
-                .spec(requestSpecification)
+        response =given().spec(requestSpecification)
                 .basePath(APIConstants.CREATE_UPDATE_GET+"/"+bookingId)
-                .body(payloadManager.updateBookingPayloadAsString())
+                .body(payloadManager.updateBookingPayloadAsJsonString())
                 .cookie("token",getToken())
                 .log().all()
-                .when().put();
-        validatableResponse=response.then().log().all().statusCode(200);
+                .when()
+                .put();
 
-        Booking updateBookingResponse=payloadManager.updateGetResponse(response.asString());
-        String firstname=updateBookingResponse.getFirstname();
-        System.out.println("Updated firstname: " + firstname);
+        validatableResponse=response.then().statusCode(200);
+        Booking booking=payloadManager.getUpdateResponse(response.asString());
+        String firstName=booking.getFirstname();//actual Result
+        String lastName=booking.getLastname();//actual Result
+        assertActions.verifyKeys(firstName,"Kaira");
+        assertActions.verifyResponseBody(lastName,"Jeswal","Last name is not matching");
+
     }
 
     @Test(groups="qa",priority=4)
     @Owner("Bhagya")
     @Description("TCINT#1 - Step 4.Verify the delete booking ")
     public void deleteBooking(ITestContext iTestContext){
+//token
         Integer bookingId=(Integer)iTestContext.getAttribute("b_id");
         response=given()
                 .spec(requestSpecification)
@@ -88,8 +95,6 @@ public class Integration_Scenario1 extends BaseTest {
                 .log().all()
                 .when().delete();
         validatableResponse=response.then().log().all().statusCode(201);
-
-
     }
 
 }

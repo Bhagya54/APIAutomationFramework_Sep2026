@@ -14,22 +14,9 @@ public class PayloadManager {
 
     //Serialization - Java object - Json string
     //Create Booking
-    public String bookingPayloadAsJsonString(String firstName, String lastName, boolean DepositPaid, int totalPrice, String checkin, String checkout, String additionalNeeds) {
-        booking.setFirstname(firstName);
-        booking.setLastname(lastName);
-        booking.setDepositpaid(DepositPaid);
-        booking.setTotalprice(totalPrice);
-        bookingDates.setCheckin(checkin);
-        bookingDates.setCheckout(checkout);
-        booking.setBookingdates(bookingDates);
-        booking.setAdditionalneeds(additionalNeeds);
-        String bookingPayloadString = gson.toJson(booking);
-        return bookingPayloadString;
-    }
-
     public String bookingPayloadAsJsonString() {
-        booking.setFirstname("Hari");
-        booking.setLastname("Komal");
+        booking.setFirstname("Jim");
+        booking.setLastname("Brown");
         booking.setDepositpaid(true);
         booking.setTotalprice(123);
         bookingDates.setCheckin("2025-01-01");
@@ -40,6 +27,19 @@ public class PayloadManager {
         return bookingPayloadString;
     }
 
+
+    public String bookingPayloadAsJsonString(String firstname,String lastname,boolean depositPaid,int totalPrice,String checkin,String checkout,String additionalNeeds) {
+        booking.setFirstname(firstname);
+        booking.setLastname(lastname);
+        booking.setDepositpaid(depositPaid);
+        booking.setTotalprice(totalPrice);
+        bookingDates.setCheckin(checkin);
+        bookingDates.setCheckout(checkout);
+        booking.setBookingdates(bookingDates);
+        booking.setAdditionalneeds(additionalNeeds);
+        String bookingPayloadString = gson.toJson(booking);
+        return bookingPayloadString;
+    }
 
     //Deserialisation - JSON response string - Java object
     public CreateBookingResponse createBookingResponse(String bookingResponseString){
@@ -62,38 +62,25 @@ public class PayloadManager {
         return token;
     }
 
-    public String updateBookingPayloadAsString(String firstName, String lastName, boolean DepositPaid, int totalPrice, String checkin, String checkout, String additionalNeeds){
-        booking.setFirstname(firstName);
-        booking.setLastname(lastName);
-        booking.setDepositpaid(DepositPaid);
-        booking.setTotalprice(totalPrice);
-        bookingDates.setCheckin(checkin);
-        bookingDates.setCheckout(checkout);
+    public String updateBookingPayloadAsJsonString() {
+        booking.setFirstname("Kaira");
+        booking.setLastname("Jeswal");
+        booking.setDepositpaid(true);
+        booking.setTotalprice(123);
+        bookingDates.setCheckin("2026-01-01");
+        bookingDates.setCheckout("2027-01-01");
         booking.setBookingdates(bookingDates);
-        booking.setAdditionalneeds(additionalNeeds);
-
-        String updatedbookingPayloadString=gson.toJson(booking);
-        return updatedbookingPayloadString;
-
+        booking.setAdditionalneeds("dinner");
+        String bookingPayloadString = gson.toJson(booking);
+        return bookingPayloadString;
     }
 
-    public String updateBookingPayloadAsString(){
-        booking.setFirstname("Govardhan");
-        booking.setLastname("hhh");
-        booking.setDepositpaid(false);
-        booking.setTotalprice(234);
-        bookingDates.setCheckin("2025-01-01");
-        bookingDates.setCheckout("2026-01-01");
-        booking.setBookingdates(bookingDates);
-        booking.setAdditionalneeds("uuu");
-
-        String updatedbookingPayloadString=gson.toJson(booking);
-        return updatedbookingPayloadString;
-
-    }
-
-    public Booking updateGetResponse(String responseString){
+    public Booking getUpdateResponse(String responseString){
         booking=gson.fromJson(responseString,Booking.class);
         return booking;
     }
+
+
+
+
 }

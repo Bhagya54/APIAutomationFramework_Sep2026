@@ -1,0 +1,2 @@
+INFO    2026-09-15 11:00:41,647 [main] org.example.base.BaseTest  - Data Properties file has been loaded
+INFO    2026-09-15 11:00:41,647 [main] org.example.base.BaseTest  - API Test has been started
